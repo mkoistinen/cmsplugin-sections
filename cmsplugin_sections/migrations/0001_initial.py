@@ -1,40 +1,76 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from south.utils import datetime_utils as datetime
+from south.db import db
+from south.v2 import SchemaMigration
+from django.db import models
 
-from django.db import models, migrations
+
+class Migration(SchemaMigration):
+
+    def forwards(self, orm):
+        # Adding model 'SectionContainerPluginModel'
+        db.create_table(u'cmsplugin_sections_sectioncontainerpluginmodel', (
+            (u'cmsplugin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cms.CMSPlugin'], unique=True, primary_key=True)),
+            ('subordinate_page', self.gf('django.db.models.fields.BooleanField')(default=False)),
+        ))
+        db.send_create_signal(u'cmsplugin_sections', ['SectionContainerPluginModel'])
+
+        # Adding model 'SectionBasePluginModel'
+        db.create_table(u'cmsplugin_sections_sectionbasepluginmodel', (
+            (u'cmsplugin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cms.CMSPlugin'], unique=True, primary_key=True)),
+            ('section_title', self.gf('django.db.models.fields.CharField')(default=u'', max_length=64)),
+            ('show_title', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('section_menu_label', self.gf('django.db.models.fields.CharField')(default=u'', max_length=64, blank=True)),
+            ('section_menu_slug', self.gf('django.db.models.fields.SlugField')(default=u'', max_length=64, blank=True)),
+            ('show_in_menu', self.gf('django.db.models.fields.BooleanField')(default=True)),
+        ))
+        db.send_create_signal(u'cmsplugin_sections', ['SectionBasePluginModel'])
 
 
-class Migration(migrations.Migration):
+    def backwards(self, orm):
+        # Deleting model 'SectionContainerPluginModel'
+        db.delete_table(u'cmsplugin_sections_sectioncontainerpluginmodel')
 
-    dependencies = [
-        ('cms', '0003_auto_20140926_2347'),
-    ]
+        # Deleting model 'SectionBasePluginModel'
+        db.delete_table(u'cmsplugin_sections_sectionbasepluginmodel')
 
-    operations = [
-        migrations.CreateModel(
-            name='SectionBasePluginModel',
-            fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
-                ('section_title', models.CharField(default='', help_text='This is the section title.', max_length=64, verbose_name='title')),
-                ('show_title', models.BooleanField(default=True, verbose_name='display title?')),
-                ('section_menu_label', models.CharField(default='', help_text='This is how the menu item is displayed. Leave empty to use section title.', max_length=64, verbose_name='label', blank=True)),
-                ('section_menu_slug', models.SlugField(default='', max_length=64, blank=True, help_text='This is the hash part of the URL for intra-page links. Leave it blank and it will be auto-generated from the section title.', verbose_name='section menu slug')),
-                ('show_in_menu', models.BooleanField(default=True, verbose_name='show in menu?')),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=('cms.cmsplugin',),
-        ),
-        migrations.CreateModel(
-            name='SectionContainerPluginModel',
-            fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
-                ('subordinate_page', models.BooleanField(default=False, verbose_name='subordinate_page?')),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=('cms.cmsplugin',),
-        ),
-    ]
+
+    models = {
+        'cms.cmsplugin': {
+            'Meta': {'object_name': 'CMSPlugin'},
+            'changed_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'language': ('django.db.models.fields.CharField', [], {'max_length': '15', 'db_index': 'True'}),
+            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cms.CMSPlugin']", 'null': 'True', 'blank': 'True'}),
+            'placeholder': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cms.Placeholder']", 'null': 'True'}),
+            'plugin_type': ('django.db.models.fields.CharField', [], {'max_length': '50', 'db_index': 'True'}),
+            'position': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
+        },
+        'cms.placeholder': {
+            'Meta': {'object_name': 'Placeholder'},
+            'default_width': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'slot': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'})
+        },
+        u'cmsplugin_sections.sectionbasepluginmodel': {
+            'Meta': {'object_name': 'SectionBasePluginModel'},
+            u'cmsplugin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['cms.CMSPlugin']", 'unique': 'True', 'primary_key': 'True'}),
+            'section_menu_label': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '64', 'blank': 'True'}),
+            'section_menu_slug': ('django.db.models.fields.SlugField', [], {'default': "u''", 'max_length': '64', 'blank': 'True'}),
+            'section_title': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '64'}),
+            'show_in_menu': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'show_title': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
+        },
+        u'cmsplugin_sections.sectioncontainerpluginmodel': {
+            'Meta': {'object_name': 'SectionContainerPluginModel'},
+            u'cmsplugin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['cms.CMSPlugin']", 'unique': 'True', 'primary_key': 'True'}),
+            'subordinate_page': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+        }
+    }
+
+    complete_apps = ['cmsplugin_sections']

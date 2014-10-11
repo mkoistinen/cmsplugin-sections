@@ -21,7 +21,7 @@ class SectionContainerPlugin(CMSPluginBase):
     model = CMSPlugin
     module = 'Sections'
     name = 'Section Container'
-    render_template = 'sections/section-container.html'
+    render_template = 'cmsplugin_sections/section-container.html'
     text_enabled = False
 
     def render(self, context, instance, placeholder):
@@ -58,7 +58,7 @@ class BaseSectionPlugin(CMSPluginBase):
     cache = True
     model = SectionBasePluginModel
     module = 'Sections'
-    render_template = "sections/section-base.html"
+    render_template = "cmsplugin_sections/section-base.html"
 
     # These properties MUST be overridden
     name = 'Unnamed Section'
@@ -82,7 +82,7 @@ class SectionPlugin(BaseSectionPlugin):
     allow_children = True
     model = SectionBasePluginModel
     name = 'Section'
-    render_template = "sections/section.html"
+    render_template = "cmsplugin_sections/section.html"
     text_enabled = False
 
 plugin_pool.register_plugin(SectionPlugin)
