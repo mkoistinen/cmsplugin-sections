@@ -16,7 +16,7 @@
 #
 
 from setuptools import setup, find_packages
-from cmsplugins_sections import __version__
+from cmsplugins_section import __version__
 
 
 INSTALL_REQUIRES = [
