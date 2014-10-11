@@ -20,7 +20,7 @@ from cmsplugin_sections import __version__
 
 
 INSTALL_REQUIRES = [
-    'Django>=2.4.3',
+    'Django>=1.7.0',
     'django-cms>=3.0.6',
 ]
 
