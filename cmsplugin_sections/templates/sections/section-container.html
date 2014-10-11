@@ -1,0 +1,18 @@
+{% load cms_tags staticfiles %}
+
+<header class="page">
+  <a class="logo" href="/#{{ sections.0.slug }}"><img src=""></a>
+  <nav class="page">
+    <div class="menu">
+      <ul class="section-menu">{% for section in sections %}
+        <li><a href="#{{ section.slug }}">{{ section.label }}</a></li>{% endfor %}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div>
+  {% for child_section in section_plugins %}
+    {% render_plugin child_section  %}
+  {% endfor %}
+</div>
