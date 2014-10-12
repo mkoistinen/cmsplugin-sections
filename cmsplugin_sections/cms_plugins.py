@@ -24,16 +24,42 @@ class SectionContainerPlugin(CMSPluginBase):
     render_template = 'cmsplugin_sections/section-container.html'
     text_enabled = False
 
+    def get_children(self, instance):
+        """
+        This builds a dict for each child, containing the child, the next
+        child and the previous child. This provides convenient linking between
+        the sections.
+        """
+
+        children = []
+
+        for i, child in enumerate(instance.child_plugin_instances):
+            prev_child = None
+            next_child = None
+
+            if i > 0:
+                prev_child = instance.child_plugin_instances[i-1]
+
+            if i < len(instance.child_plugin_instances) - 1:
+                next_child = instance.child_plugin_instances[i+1]
+
+            children.append({
+                'prev': prev_child,
+                'child': child,
+                'next': next_child,
+            })
+
+        return children
+
     def render(self, context, instance, placeholder):
 
         section_menu_items = []
 
         for child in instance.child_plugin_instances:
-            # child_plugin = child.get_plugin_class_instance()
             if child.show_in_menu:
-                section_menu_items.append(child.get_section_config())
+                section_menu_items.append(child)
 
-        context['section_plugins'] = instance.child_plugin_instances
+        context['children'] = self.get_children(instance)
         context['sections'] = section_menu_items
 
         return context

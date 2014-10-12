@@ -62,23 +62,13 @@ class AbstractSectionBasePluginModel(CMSPlugin):
     )
 
 
-    def get_section_config(self):
-        """
-        This method returns what is necessary for the section container to
-        render the menu of intra-page links to the various sections as a dict.
-        """
-
-        return {
-            'title': self.section_title,
-            'label': self.section_menu_label if self.section_menu_label else self.section_title,
-            'slug': self.section_menu_slug,
-        }
-
-
     def save(self, *args, **kwargs):
         """
         Save override to ensure that there is a unique slug for this item.
         """
+
+        if not self.section_menu_label:
+            self.section_menu_label = self.section_title
 
         if not self.section_menu_slug:
             unique_slugify(self, self.section_title, slug_field_name='section_menu_slug')
