@@ -111,13 +111,13 @@ class SplashSectionPluginModel(AbstractSectionBasePluginModel):
 
 NOTE:
 	
-	If is entirely optional to create your own pluginmodel. You *could* use
-	the provided one, but, if you ever change your mind, it will be rather
-	complicated to migrate any existing Section plugins to your new model. If
-	instead you create an intermediate base class like the one shown above,
-	even if its body is simply: `pass`, you will thank yourself in the future
-	when you decide to add a configuration parameter to any existing sections
-	of this type.
+	If is entirely optional to create your own pluginmodel if you don't need
+	to add configuration options. You *could* just use the provided one, but,
+	if you ever change your mind, it will be rather complicated to migrate any
+	existing Section plugins to your new model. If instead you create an
+	intermediate base class like the one shown above, even if its body is
+	simply: `pass`, you will thank yourself in the future when you decide to
+	add a configuration parameter to any existing sections of this type.
 
 
 Your `cms_plugins.py` might look like this:
