@@ -110,7 +110,7 @@ NOTE:
 	If is entirely optional to create your own pluginmodel. You *could* use
 	the provided one, but, if you ever change your mind, it will be rather
 	complicated to migrate any existing Section plugins to your new model. If
-	instead you create an intermediate base clase like the one shown above,
+	instead you create an intermediate base class like the one shown above,
 	even if its body is simply: `pass`, you will thank yourself in the future
 	when you decide to add a configuration parameter to any existing sections
 	of this type.
