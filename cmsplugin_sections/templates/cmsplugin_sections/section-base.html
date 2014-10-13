@@ -1,11 +1,12 @@
-{% load %}
 <section id="{{ instance.section_menu_slug }}">
   <div class="outer">
     <div class="inner">
       {% block section_content %}
-      {% endblock %}{% if prev %}
-      <a href="{{ prev.section_menu_slug }}">{{ prev.section_menu_label }}</a>{% endif %}{% if next %}
-      <a href="{{ next.section_menu_slug }}">{{ next.section_menu_label }}</a>{% endif %}
+      {% endblock %}{% if prev or next %}
+      <div class="section-links">
+        {% if prev %}<a class="prev" href="#{{ prev.section_menu_slug }}">{{ prev.section_menu_label }}</a>{% endif %}
+        {% if next %}<a class="next" href="#{{ next.section_menu_slug }}">{{ next.section_menu_label }}</a>{% endif %}
+      </div>{% endif %}
     </div>
   </div>
 </section>

@@ -1,5 +1,4 @@
 {% load cms_tags %}
-
 <header class="page">
   <a class="logo" href="/#{{ sections.0.section_menu_slug }}"><img src=""></a>
   <nav class="page">
@@ -10,7 +9,6 @@
     </div>
   </nav>
 </header>
-
 <div>
   {% for child_section in children %}
     {% with next=child_section.next prev=child_section.prev %}

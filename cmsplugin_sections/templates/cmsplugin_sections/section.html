@@ -1,10 +1,5 @@
 {% extends 'cmsplugin_sections/section-base.html' %}
 {% load cms_tags %}
-  {% comment %}
-  Other context variables:
-      next = The next section
-      prev = The previous section
-  {% endcomment %}
-  {% block section_content %}
-    {% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}
-  {% endblock %}
+{% block section_content %}
+	{% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}
+{% endblock %}
