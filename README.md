@@ -69,15 +69,19 @@ If using Django 1.7, then add:
 to settings.MIGRATION_MODULES
 
 
-## USAGE
+## NORMAL USAGE
 
-1. Add a Section Container plugin to your page;
+1. Add a Section Container plugin to the page;
 2. Add one or more Section plugins into the Section Container;
-3. Add content to each Section plugin as per usual.
-4. Rock'n'roll!
+3. Add content to each Section plugin as per usual;
+4. Style with CSS to suite your needs;
+5. Optionally add the above JS to your project to provide smooth scrolling
+   between sections;
+6. Optionally override or extend the provided templates to further suite your
+   needs.
 
 
-## ADVANCED
+## ADVANCED USAGE
 
 In most cases, you could easily just create normal CMS Plugins which can then
 be added to a Section plugin to get the variety of content you wish your
